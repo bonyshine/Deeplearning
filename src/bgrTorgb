@@ -1,0 +1,22 @@
+import cv2
+import os
+
+# Set paths
+input_folder = "C:\\Users\\me.com\\Documents\\deepLearning\\project\\synthesize\\synthetic-images\\processed\\images\\val"
+output_folder = "C:\\Users\\me.com\\Documents\\deepLearning\\project\\synthesize\\synthetic-images\\processed\\images\\valRGB"
+
+# Create output folder if it doesn't exist
+os.makedirs(output_folder, exist_ok=True)
+
+# Process all images in the folder
+for filename in os.listdir(input_folder):
+    if filename.endswith((".jpg", ".png", ".jpeg")):  # Process only image files
+        img_path = os.path.join(input_folder, filename)
+        img = cv2.imread(img_path)  # Load image in BGR
+
+        if img is not None:
+            rgb_img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)  # Convert to RGB
+            output_path = os.path.join(output_folder, filename)
+            cv2.imwrite(output_path, rgb_img)  # Save corrected image
+
+print("Batch conversion complete! 🚀")
